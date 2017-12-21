@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+<!--    <script src="Resources/public/js/adduser.js"></script>   -->
+{% endblock %}
+
+{% block content %}
+   <h1>Edit User Page</h1>
+   
+   {{ forms.edituser(user, accessLevels) }}
+
+{% endblock %}

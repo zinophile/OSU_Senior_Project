@@ -1,0 +1,403 @@
+{% macro adduser(accesslevels, regions) %}
+   <form class="form-horizontal" method="get">
+      <div class="form-group">
+         <label class="control-label col-sm-2" for="firstname">First Name:</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="control-label col-sm-2" for="lastname">Last Name:</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="control-label col-sm-2" for="email">Email:</label>
+         <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="control-label col-sm-2" for="accesslevel">Access Level:</label>
+         <div class="col-sm-10">
+            {% for key,value in accesslevels %}
+               <div class="radio">
+                  <label><input type="radio" value='{{ key }}' id='{{ value }}' name="accesslevel" required>{{ value }}</label>
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+
+      <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="Add User" name="adduser" class="btn btn-default"></input>
+         </div>
+      </div>
+   </form>
+{% endmacro adduser %}
+
+{% macro userlogin(forgot) %}
+   <form method="post">
+      <div class="form-group">
+         <label for="email">Email address:</label>
+         <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+         <label for="password">Password:</label>
+         <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <input type="hidden" value="userlogin" name="userlogin"></input>
+      {% if forgot == true %}
+         <input type="hidden" value={{ resetkey }} name="resetkey"></input>
+      {% endif %}
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+{% endmacro userlogin %}
+
+{% macro forgotpassword() %}
+   <form method="post">
+      <div class="form-group">
+         <label for="email">Email address:</label>
+         <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <input type="hidden" value="forgotpassword" name="forgotpassword"></input>
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+
+{% endmacro forgotpassword %}
+
+{% macro useractivation(key) %}
+   <form method="post">
+      <div class="form-group">
+         <label for="email">Email address:</label>
+         <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+         <label for="password">Password:</label>
+         <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <input type="hidden" value={{ key }} name="useractkey"></input>
+      <input type="hidden" value="useractivation" name="useractivation"></input>
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+{% endmacro useractivation %}
+
+{% macro resetpassword(email, password, hideemailpassword, fromactivation, fromforgot, resetkey) %}
+   <form method="post">
+
+      {% if hideemailpassword == true %}
+         <input type="hidden" value={{ email }} class="form-control" id="email" name="email" ></input>
+         <input type="hidden" value={{ password }} class="form-control" id="password" name="password">
+         {% if fromactivation == true %}
+            <input type="hidden" value={{ fromactivation }} class="form-control" id="fromactivation" name="fromactivation">
+         {% elseif fromforgot == true %}
+            <input type="hidden" value={{ fromforgot }} class="form-control" id="fromforgot" name="fromforgot">
+            <input type="hidden" value={{ resetkey }} class="form-control" id="resetkey" name="resetkey">
+         {% endif %}
+      {% else  %}
+         <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email" name="email" required></input>
+         </div>
+         <div class="form-group">
+            <label for="password">Current Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+         </div>
+      {% endif %}
+
+      <div class="form-group">
+         <label for="password">New Password:</label>
+         <input type="password" class="form-control" id="newpassword" name="newpassword" required>
+      </div>
+      <div class="form-group">
+         <label for="password">Verify New Password:</label>
+         <input type="password" class="form-control" id="verifynewpassword" name="verifynewpassword" required>
+      </div>
+      <input type="hidden" value="resetpassword" name="resetpassword"></input>
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+{% endmacro resetpassword %}
+
+
+{% macro managemyaccount(firstname, lastname) %}
+   <form method="post">
+      <div class="form-group">
+         <label for="firstname">First Name:</label>
+         <input type="firstname" class="form-control" id="firstname" name="firstname" placeholder={{ firstname }}>
+      </div>
+      <div class="form-group">
+         <label for="lastname">Last Name:</label>
+         <input type="lastname" class="form-control" id="lastname" name="lastname" placeholder={{ lastname }}>
+      </div>
+      <input type="hidden" value="updateaccount" name="updateaccount"></input>
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+{% endmacro managemyaccount %}
+
+{% macro uploadsignature() %}
+
+   <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+      <div class="form-group">
+         <label for="signature">Signature Image:</label>
+         <input class="form-control" id="signature" type="file" name="signature"/>
+      </div>
+      <input type="hidden" value="uploadsignature" name="uploadsignature"></input>
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+
+   
+{% endmacro uploadsignature %}
+
+{% macro getreport(reporttypes, regions, names) %}
+<form class="form-horizontal" method="post" action="getreport.php">
+	<div class="col-sm-offset-1 col-sm-10">
+		<h2>Business Intelligence Reporting<h2>
+	</div>
+	<br />
+	<br />
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<label for="selectreport">Select Report Type:</label>
+			<select class="form-control" name="reporttype">
+				{% for r in reporttypes %}
+					<option value = {{ r.report_ID }}>{{ r.report_type }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+	  	<!--<form class="form-horizontal" method="post">
+		<div class="form-group">
+         <label for="typeofreport">Report Type:</label>
+		</div>
+	<div class = "dropdown">
+		<button type = "button" class = "btn dropdown-toggle" type="button" data-toggle = "dropdown">Reports
+		<span class = "caret"></span>
+		</button>
+		<ul class = "dropdown-menu" id = "reporttypes">
+			<li class = "dropdown-header">Available Reports</li>
+			{% for r in reporttypes %}
+			<li><a href = "report.php">{{ r.report_type|e }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="form-group">
+      <label for="reportparameter">Report Parameter</label>
+			<input type="text" class="form-control" id="reportparameter" name="reportparameter" placeholder="Region, User, Month, Year, etc">
+	</div> -->
+	<br />
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type = "submit" value="getreport" name="getreport" class = "btn btn-default">Get Report</button>
+		</div>
+</form>
+{% endmacro getreport %}
+
+{% macro giveaward(firstname, lastname, email, awardTypes, awardRegions) %}
+<div class="container">
+   <h2>Insert your information in the following:</h2>
+	<form class="form-horizontal" method="post">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="firstname">Your First Name</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="firstname" type="text" name="firstname" placeholder={{ firstname }} disabled="disabled">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="lastname">Your Last Name</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="lastname" type="text" name="lastname" placeholder={{ lastname }} disabled="disabled">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="email">Your Email</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="email" type="email" name="email" placeholder={{ email }} disabled="disabled">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Your Job Title</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="title" type="text" name="title" placeholder="title">
+			</div>
+		</div>
+   	
+   <h2>Select/insert the award information in the following:</h2>
+      <div class="form-group">
+      	<label class="control-label col-sm-2" for="awardType">Award Type (select one):</label>
+      	<div class="col-sm-10">
+         	<select class="form-control" id="awardType" name="awardType">
+            {% for award in awardTypes %}
+				<option value={{award.award_ID}} required> {{ award.award_class }}</option>
+            {% endfor %}
+         	</select>
+        </div>
+   	</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Award Date</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="date" type="date" name="date" placeholder="MM/DD/YYYY">
+			</div>
+		</div>
+<!--  <div class="form-group">
+         <label class="control-label col-sm-2" for="awardCity">Award City (select one):</label>
+         <div class="col-sm-10">
+            <select class="form-control" id="awardType" name="awardCity">
+            {% for city in awardCities %}
+            <option value={{region.city}} required> {{ region.city }}</option>
+            {% endfor %}
+            </select>
+        </div>
+      </div> -->
+      <div class="form-group">
+         <label class="control-label col-sm-2" for="awardRegion">Award Region (select one):</label>
+         <div class="col-sm-10">
+            <select class="form-control" id="awardRegion" name="awardRegion">
+            {% for region in awardRegions %}
+            <option value={{region.region_ID}} required> {{ region.region_name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+      </div>
+	
+   <h2>Insert award recipient's information in the following:</h2>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="rFName">Recipient's First Name</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="rFName" type="text" name="rFName" placeholder="first name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="rLName">Recipient's Last Name</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="rLName" type="text" name="rLName" placeholder="last name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="remail">Recipient's Email</label>
+			<div class="col-sm-10">
+				<input class="form-control" id="remail" type="email" name="remail" placeholder="email">
+			</div>
+		</div>
+		<div class="form-group">
+        	<div class="col-sm-offset-2 col-sm-10">
+            	<input type="submit" value="Submit Award" name="giveaward" class="btn btn-default"></input>
+         	</div>
+      	</div>
+	</form>
+</div>
+{% endmacro giveaward %}
+
+{% macro viewawards(awardsFromUser) %}
+
+   <form method="post">
+      <table class="table-bordered table-striped table-padding center-text">
+         <thead>
+           <tr>
+               <th>Delete Award</th>
+               <th>Recipient</th>
+               <th>Award</th>
+               <th>Date Awarded</th>
+               <th>Recipient Email</th>
+               <th>City - Region</th>
+           </tr>
+         </thead>
+         <tbody>
+            {% for award in awardsFromUser %}
+               <tr>
+                  <td>
+                     <div class="form-group">
+                        <input class="form-control" type="checkbox" name="awardIDs[]" value={{ award.award_record_ID }}>
+                     </div>
+                  </td>
+                  <td>{{award.recipient_fname}} {{award.recipient_lname}}</td>
+                  <td>{{award.award_class}}</td>
+                  <td>{{award.award_create_date|date('m/d/Y')}}</td>
+                  <td>{{award.recipient_email}}</td>
+                  <td>{{award.city}} - {{award.region_name}}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      <input type="hidden" value="deleteawards" name="deleteawards"></input>
+      <button type="submit" class="btn btn-warning margin-top-20">Delete Selected Awards</button>
+   </form>
+
+{% endmacro viewawards %}
+
+
+{% macro viewusers(users) %}
+
+   <form method="post">
+      <table class="table-bordered table-striped table-padding center-text" id="viewUsersTable">
+         <thead>
+           <tr>
+               <th>Delete User</th>
+               <th>User</th>
+               <th>Username/Email</th>
+               <th>Date Created</th>
+               <th>Access Level</th>
+               <th>Edit User</th>
+           </tr>
+         </thead>
+         <tbody>
+            {% for user in users %}
+               <tr>
+                  <td>
+                     <div class="form-group">
+                        <input class="form-control" type="checkbox" name="userids[]" value={{ user.id }}>
+                     </div>
+                  </td>
+                  <td>{{user.firstname}} {{user.lastname}}</td>
+                  <td>{{user.username}}</td>
+                  <td>{{user.create_date|date('m/d/Y')}}</td>
+                  <td>{{user.access_level}}</td>
+                  <td>
+                     <a href="edituser.php?userID={{ user.id }}">
+                        <button type='button'><span>Edit</span></button>
+                     </a>
+                  </td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      <input type="hidden" value="deleteusers" name="deleteusers"></input>
+      <button type="submit" class="btn btn-warning margin-top-20 margin-left-100">Delete Selected Users</button>
+   </form>
+
+{% endmacro viewusers %}
+
+
+{% macro edituser(user, accessLevels) %}
+   <form method="post">
+      <div class="form-group">
+         <label for="firstname">First Name:</label>
+         <input type="firstname" class="form-control" id="firstname" name="firstname" placeholder={{ user.firstname }}>
+      </div>
+      <div class="form-group">
+         <label for="lastname">Last Name:</label>
+         <input type="lastname" class="form-control" id="lastname" name="lastname" placeholder={{ user.lastname }}>
+      </div>
+      <div class="form-group">
+         <label class="control-label col-sm-2" for="accesslevel">Access Level:</label>
+         <div class="col-sm-10">
+            {% for key,value in accessLevels %}
+               <div class="radio">
+                  <label>
+                     <input type="radio" value='{{ key }}' id='{{ value }}' name="accesslevel" 
+                        {% if (user.acc_ID) ==  (key) %}
+                           checked="checked"
+                        {% endif %}
+                     >
+                     {{ value }}
+                  </label>
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+      <input type="hidden" value={{user.id}} name="userID"></input>
+      <input type="hidden" value="updateuser" name="updateuser"></input>
+      <button type="submit" class="btn btn-default">Update User</button>
+   </form>
+{% endmacro edituser %}

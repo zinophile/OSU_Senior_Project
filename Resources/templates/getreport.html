@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% import "macros/googlecharts.html" as googlecharts %}
+
+{% block title %}Business Intelligence Report{% endblock %}
+
+{% block head %}
+   {{ parent() }}
+   <style type="text/css">
+     .important { color: #336699; }
+   </style>
+   
+   <!--<title>Business Intelligence Report</title>-->
+   <!--Load jQuery-->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <!--Load the Google JS API-->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+	{% if charttype == "1" %}
+      {{ googlecharts.chart1() }}
+	{% endif %}
+		
+	{% if charttype == "2" %}
+      {{ googlecharts.chart2() }}
+	{% endif %}
+	
+	{% if charttype == "3" %}
+      {{ googlecharts.chart3() }}
+	{% endif %}
+	
+	{% if charttype == "4" %}
+      {{ googlecharts.chart4() }}
+	{% endif %}    
+    
+    
+{% endblock %}
+
+{% block content %}
+	<div>
+		<h1>Business Intelligence Report</h1>
+	</div>
+	<br />
+	{% if charttype == "1" %}{{ googlecharts.chart1() }}
+		<input type="hidden" value={{ jsonTable1 }} id='h_v' class='h_v'>
+		<div id="columnchart" style="width: 1200px; height: 800px;"></div>
+	{% endif %}
+		
+	{% if charttype == "2" %}{{ googlecharts.chart2() }}
+		<input type="hidden" value={{ jsonTable2 }} id='h_v' class='h_v'>
+		<div id="barchart" style="width: 1200px; height: 800px;"></div>
+	{% endif %}
+	
+	{% if charttype == "3" %}{{ googlecharts.chart3() }}
+		<input type="hidden" value={{ jsonTable3 }} id='h_v' class='h_v'>
+		<div id="piechart" style="width: 1200px; height: 800px;"></div>
+	{% endif %}
+	
+	{% if charttype == "4" %}{{ googlecharts.chart4() }}
+		<input type="hidden" value={{ jsonTable4 }} id='h_v' class='h_v'>
+		<div id="columnchart" style="width: 1200px; height: 800px;"></div>
+	{% endif %}
+	
+{% endblock %}

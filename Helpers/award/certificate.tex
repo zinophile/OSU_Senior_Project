@@ -1,0 +1,83 @@
+\documentclass[fontsize=24pt]{scrartcl} %different doc type than normal because of layout
+\usepackage[a4paper,left=1.8cm,right=1.8cm,top=2cm,bottom=2cm,heightrounded]{geometry}
+\usepackage[svgnames]{xcolor} %for text colors
+\usepackage{datatool}
+\usepackage{pdflscape} %to make it a landscape awward
+\usepackage{setspace} %line spacing control
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} %to include a signature image eventually
+\usepackage[normalem]{ulem} %emphasis
+\usepackage{mathpazo}  %fonts
+\usepackage{microtype}
+\usepackage{frcursive}
+\hyphenpenalty100000 %prevents hyphenation in lines
+\usepackage[all]{nowidow} %to stop random spacing issues
+\usepackage{background} %following 2 lines require this package for border
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+%
+%----------Border------------
+\SetBgScale{1}
+\SetBgAngle{0}
+\SetBgColor{white}
+\SetBgContents{
+\begin{tikzpicture}[overlay,remember picture]
+	    \draw [dashed,line width=10pt,color=LightSlateGrey,
+	           ,rounded corners=20pt,double=MidnightBlue,double distance=10pt]
+	          ($ (current page.north west) + (1cm,-1cm) $) rectangle
+	          ($ (current page.south east) + (-1cm,1cm) $);
+\end{tikzpicture}
+}
+%--------End Border----------
+%
+\def\signature#1#2{\parbox[b]{4in}{\smash{#1}\vskip12pt}
+\hfill \parbox[t]{4in}{\shortstack{\vrule width 4.2in height 1.0pt\\\small#2}}}
+%
+\begin{document}
+\sloppy
+\DTLloaddb{data}{data.csv}
+%
+\begin{landscape}
+	%
+	\pagestyle{empty}
+	\DTLforeach{data}{
+		\GFName=GiverFName, \GLName=GiverLName, \Title=Title, \Date=Date, \Type=Type, \RFName=RecFName, 	
+		\RLName=RecLName}{
+		\linespread{1.5}\selectfont
+		%---------------------------------------------------				
+		\begin{center}
+		\begin{minipage}[c]{7.2in}%
+			{\centering\bigskip
+			{\LARGE\bfseries {\color{SlateGrey}{{Department of Human Resources}}}}\\
+			{\large\bfseries\color{MediumTurquoise}{\Type}}\\
+			{\Large\bfseries \color{MidnightBlue}{Certificate of Recognition}
+			\vskip0.25em
+			\par}}%
+		\end{minipage}%
+		%
+		\hfill
+		%
+		\vskip2.0em
+		%
+		{
+		\doublespacing	
+		This is to recognize \uline{\emph{\large\sffamily\color{DarkTurquoise}
+		{\RFName \RLName}}} for outstanding customer service and record sales at 
+		\emph{\color{LightSlateGrey} {Bossa Nova Sales Company}} on this day, {\Date}.
+		}
+		\end{center}
+		%
+		\vskip1.5em
+		%
+		\begin{minipage}[r]{4in}
+			\signature{}{\GFName \GLName \\ \Title }		
+		\end{minipage}%
+		%
+		\vfil
+		\pagebreak
+}
+%
+\end{landscape}
+%
+\end{document}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block head %}
+   {{ parent() }}
+
+<!--    <script src="Resources/public/js/index.js"></script>   -->
+{% endblock %}
+
+{% block content %}
+   <h1>Recognition Home</h1>
+
+   {% if accessLevel == "Admin" %}
+      <a class="button-link" href="adduser.php">
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <button type="button" class="btn btn-primary btn-block btn-lg hrButton">
+                 <span class="glyphicon glyphicon-plus glyphiconHRImg"></span>
+            </button>
+            <h3 class="btn-text">Add User</h3>
+         </div>
+      </a>
+      <a class="button-link" href="businessintel.php">
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <button type="button" class="btn btn-primary btn-block btn-lg hrButton">
+                 <span class="glyphicon glyphicon-stats glyphiconHRImg"></span>
+            </button>
+            <h3 class="btn-text">Business Intelligence</h3>
+         </div>
+      </a>
+      <a class="button-link" href="viewusers.php">
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <button type="button" class="btn btn-primary btn-block btn-lg hrButton">
+                 <span class="glyphicon glyphicon-user glyphiconHRImg"></span>
+            </button>
+            <h3 class="btn-text">View/Delete/Edit Users</h3>
+         </div>
+      </a>
+   {% endif %}
+
+   {% if accessLevel == "Normal" %}
+      <a class="button-link" href="giveaward.php">
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <button type="button" class="btn btn-primary btn-block btn-lg hrButton">
+                 <span class="glyphicon glyphicon-star-empty glyphiconHRImg"></span>
+            </button>
+            <h3 class="btn-text">Give An Award</h3>
+         </div>
+      </a>
+      <a class="button-link" href="viewawards.php">
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <button type="button" class="btn btn-primary btn-block btn-lg hrButton">
+                 <span class="glyphicon glyphicon-stats glyphiconHRImg"></span>
+            </button>
+            <h3 class="btn-text">View Awards Given</h3>
+         </div>
+      </a>
+   {% endif %}
+
+   <a class="button-link" href="managemyaccount.php">
+      <div class="col-sm-4 col-md-4 col-lg-4">
+         <button type="button" class="btn btn-primary btn-block btn-lg hrButton">
+              <span class="glyphicon glyphicon-cog glyphiconHRImg"></span>
+         </button>
+         <h3 class="btn-text">Manage My Account</h3>
+      </div>
+  </a>
+
+{% endblock %}

@@ -1,0 +1,4 @@
+composer.phar
+vendor/*
+Resources/public/images/signatures/*
+sftp-config.json

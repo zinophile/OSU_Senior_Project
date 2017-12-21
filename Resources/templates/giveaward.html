@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}Award a Certificate{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+	<h1>Award a Certificate</h1>
+	
+	<h2>To send an award:</h2>
+	{{ forms.giveaward(firstname, lastname, email, awardTypes, awardRegions) }}
+	
+
+{% endblock %}

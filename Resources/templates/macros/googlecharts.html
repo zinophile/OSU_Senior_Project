@@ -1,0 +1,146 @@
+{% macro chart1() %}
+	<script type="text/javascript">
+		// Load the Visualization API and the columnchart package.
+	google.charts.load('current', {packages: ['corechart']});
+		// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+	function drawChart() {
+			// Create the data table
+		charData = $(h_v).val();
+		console.log(charData);
+		var data = new google.visualization.DataTable(charData);
+
+	<!--var jsonData = $.ajax({url: "getData.php",dataType:"json",async: false}).responseText;
+	-->
+		// Create the data table out of JSON data loaded from server.
+	//var data = new google.visualization.DataTable(jsonData);
+				
+			// Set chart options
+		var options = {
+			title: 'Awards by Region',
+			is3D: 'true'
+		};
+
+			// Instantiate and draw our chart, passing in some options.
+		var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+		chart.draw(data, options);
+	}
+	</script>
+{% endmacro chart1 %}
+
+
+{% macro chart2() %}
+	<script type="text/javascript">
+		// Load the Visualization API and the barchart package.
+	google.charts.load('current', {packages: ['corechart', 'bar']});
+		// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+	function drawChart() {
+			// Create the data table
+		charData = $(h_v).val();
+		console.log(charData);
+		var data = new google.visualization.DataTable(charData);
+	
+		//var data = new google.visualization.DataTable(<?=$jsonTable?>);
+
+		<!--var jsonData = $.ajax({url: "getData.php",dataType:"json",async: false}).responseText;-->
+					 
+			// Create the data table out of JSON data loaded from server.
+		//var data = new google.visualization.DataTable(jsonData);
+				
+			// Set chart options
+		var options = {
+			title: 'Awards Given by User',
+			is3D: 'true',
+			bars: 'horizontal'
+		};
+
+			// Instantiate and draw our chart, passing in some options.
+		var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+		chart.draw(data, options);
+	}
+	</script>
+{% endmacro chart2 %}
+
+
+{% macro chart3() %}
+	<script type="text/javascript">
+		// Load the Visualization API and the piechart package.
+	google.charts.load('current', {packages: ['corechart']});
+		// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+	function drawChart() {
+			// Create the data table
+		charData = $(h_v).val();
+		console.log(charData);
+		var data = new google.visualization.DataTable(charData);
+	
+		//var data = new google.visualization.DataTable(<?=$jsonTable?>);
+
+		<!--var jsonData = $.ajax({url: "getData.php",dataType:"json",async: false}).responseText;-->
+					 
+			// Create the data table out of JSON data loaded from server.
+		//var data = new google.visualization.DataTable(jsonData);
+				
+			// Set chart options
+		var options = {
+			title: 'Awards Given by Year',
+			is3D: 'true'
+		};
+
+			// Instantiate and draw our chart, passing in some options.
+		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+		chart.draw(data, options);
+	}
+	</script>
+{% endmacro chart3 %}
+
+
+{% macro chart4() %}
+	<script type="text/javascript">
+		// Load the Visualization API and the piechart package.
+	google.charts.load('current', {packages: ['corechart']});
+		// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+	function drawChart() {
+			// Create the data table
+		charData = $(h_v).val();
+		console.log(charData);
+		var data = new google.visualization.DataTable(charData);
+	
+		//var data = new google.visualization.DataTable(<?=$jsonTable?>);
+
+		<!--var jsonData = $.ajax({url: "getData.php",dataType:"json",async: false}).responseText;-->
+					 
+			// Create the data table out of JSON data loaded from server.
+		//var data = new google.visualization.DataTable(jsonData);
+				
+			// Set chart options
+		var options = {
+			title: 'Awards Given by Month',
+			is3D: 'true'
+		};
+
+			// Instantiate and draw our chart, passing in some options.
+		var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+		chart.draw(data, options);
+	}
+	</script>
+
+{% endmacro chart4 %}

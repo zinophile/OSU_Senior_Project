@@ -1,0 +1,8 @@
+{
+    "require": {
+        "twig/twig": "~1.0",
+        "joshcam/mysqli-database-class": "dev-master",
+        "samayo/bulletproof": "2.0.*",
+        "phpmailer/phpmailer": "^5.2"
+    }
+}

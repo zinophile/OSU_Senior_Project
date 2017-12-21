@@ -1,0 +1,95 @@
+h1 {
+   color: black !important;
+   text-align: center;
+   margin-bottom: 50px;
+}
+
+.center-text {
+   text-align: center;
+}
+
+.table-padding td,
+.table-padding th {
+   padding: 5px 10px;
+}
+
+.margin-top-20 {
+   margin-top: 20px;
+}
+
+.margin-left-100 {
+   margin-left: 100px;
+}
+
+.hrButton {
+   width: 45%;
+   padding: 10%;
+   margin: 0 auto;
+   background-color: #428bca;
+}
+
+.hrButton:hover {
+   background-color: #428bca;
+}
+
+.glyphiconHRImg {
+   font-size: 3.0em;
+}
+
+a div {
+   padding-top: 10px;
+   border: 3px solid transparent;
+}
+
+.button-link:hover div {
+   border: 3px solid #265C8B;
+   -webkit-transition: all .2s ease-in-out;
+   -moz-transition: all .2s ease-in-out;
+   -o-transition: all .2s ease-in-out;
+   -ms-transition: all .2s ease-in-out;
+   transition: all .2s ease-in-out;
+
+}
+
+.btn-text {
+   text-align: center;
+}
+
+#bossaNovaHeader {
+   font-size: 4.5em;
+   text-align: center;
+   margin: 35px;
+}
+
+#bossaNovaSubHeader {
+   font-size: 1.3em;
+   text-align: center;
+}
+
+.navbar {
+   font-size: 1.1em;
+}
+
+header {
+   border-bottom: thin solid black;
+}
+
+.manAcctBtn{
+   width: 30%;
+}
+
+#viewUsersTable{
+   margin: 0 auto;
+}
+
+@media screen and (max-width: 993px) {
+   #bossaNovaHeader {
+      font-size: 2.9em;
+   }
+}
+
+@media screen and (max-width: 539px) {
+   #bossaNovaHeader {
+      font-size: 2.5em;
+   }
+}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}View Awards{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+<!--    <script src="Resources/public/js/adduser.js"></script>   -->
+{% endblock %}
+
+{% block content %}
+   <h1>Add User Page</h1>
+   
+   
+   {{ forms.viewawards(awardsFromUser) }}
+   
+
+
+
+{% endblock %}

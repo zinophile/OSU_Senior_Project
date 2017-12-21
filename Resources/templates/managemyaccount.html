@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}Manage My Account{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+<!--    <script src="Resources/public/js/managemyaccount.js"></script>   -->
+{% endblock %}
+
+{% block content %}
+   <h1>Manage Account</h1>
+
+   <div>
+      <h2>Update your first name and/or last name</h2>
+   </div>
+   <br />
+   <div>
+      {{ forms.managemyaccount(firstname, lastname) }}
+   </div>
+   <br />
+   <br />
+   <div>
+      <h2>Update Your Password</h2>
+   </div>
+   <div class="manAcctBtn">
+      <a class="button-link" href="password.php">
+         <button type="button" class="btn btn-info btn-block btn-lg ">
+              <span class="glyphicon glyphicon-edit "></span>
+         </button>
+         <h3 class="btn-text">Change My Password</h3>
+      </a>
+   </div>
+   
+   
+   <br />
+   <br />
+   {% if accessLevel == "Normal" %}
+      <div>
+         <h2>Upload Signature for Certificates</h2>
+      </div>
+      <div>
+         {{ forms.uploadsignature() }}
+      </div>
+      <br />
+      <br />
+      {% if signature %}
+         <div>
+            <h2>Current Signature</h2>
+         </div>
+
+         <img src={{ signature }} alt="{{username}} signature">
+      {% else %}
+         <div>
+            <h2>No Signature On File</h2>
+         </div>
+      {% endif %}
+   {% endif %}
+   
+
+
+{% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      {% block head %}
+         {% block stylesheet %}
+            <link href="Resources/public/css/bootstrap.min.css" rel="stylesheet" />
+            <link href="Resources/public/css/font-awesome.min.css" rel="stylesheet">
+            <link href="Resources/public/css/animate.min.css" rel="stylesheet">
+            <link href="Resources/public/css/prettyPhoto.css" rel="stylesheet">
+            <link href="Resources/public/css/main.css" rel="stylesheet">
+            <link href="Resources/public/css/custom.css" rel="stylesheet">
+            <link href="Resources/public/css/responsive.css" rel="stylesheet">
+         {% endblock %}
+
+         {% block javascript %}
+            <script src="Resources/public/js/jquery.js"></script>
+            <script src="Resources/public/js/bootstrap.min.js"></script>
+            <script src="Resources/public/js/jquery.prettyPhoto.js"></script>
+            <script src="Resources/public/js/jquery.isotope.min.js"></script>
+            <script src="Resources/public/js/main.js"></script>
+            <script src="Resources/public/js/wow.min.js"></script>
+         {% endblock %}
+
+         <title>{% block title %}Base Page{% endblock %}</title>
+      {% endblock %}
+   </head>
+   <body>
+
+      <header id="header">
+         <div class="top-bar">
+            <div class="container" >
+               <div class="row" id="bossaNovaHeader">
+                  <div>
+                     Employee Recognition
+                  </div>
+               </div>
+               <div class="row" id="bossaNovaSubHeader">
+                  Powered By Bossa Nova
+               </div>
+            </div><!--/.container-->
+         </div><!--/.top-bar-->
+         <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+               <div class="collapse navbar-collapse navbar-right">
+                  <ul class="nav navbar-nav">
+                     {% if accessLevel != "NotSet" %}
+                        <li><a href="index.php">Home</a></li>
+                        {% if accessLevel == "Admin" %}
+                           <li><a href="adduser.php">Add User</a></li>
+                           <li><a href="viewusers.php">View/Delete/Edit Users</a></li>
+                           <li><a href="businessintel.php">Business Intelligence</a></li>
+                        {% endif %}
+                        {% if accessLevel == "Normal" %}
+                           <li><a href="giveaward.php">Give An Award</a></li>
+                           <li><a href="viewawards.php">View Awards Given</a></li>
+                        {% endif %}
+                        <li><a href="managemyaccount.php">Manage My Account</a></li>
+                        <li><a href="logout.php">Log Out</a></li>
+                     {% endif %}
+                  </ul>
+               </div>
+            </div><!--/.container-->
+         </nav><!--/nav-->
+      </header><!--/header-->
+      <div class="container" id="content">
+         {% for message in messages %}
+            <h2>{{ message }}</h2>
+         {% endfor %}
+         {% block content %}{% endblock %}
+      </div>
+
+      <div id="footer">
+         {% block footer %}
+            Fall 2016 by Bossa Nova. Darin Etherington, Mackenzie Holznecht, Saie Kurakula
+         {% endblock %}
+      </div>
+   </body>
+</html>

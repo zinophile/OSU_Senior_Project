@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}Business Intelligence Reporting{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+	<div>
+		<h1>Business Intelligence Reporting</h1>
+	</div>
+	<br />
+	<div>
+		{{ forms.getreport(reporttypes, regions, names) }}
+	</div>
+
+{% endblock %}

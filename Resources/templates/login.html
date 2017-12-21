@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+<!--    <script src="Resources/public/js/login.js"></script>   -->
+{% endblock %}
+
+{% block content %}
+   <h1>Login</h1>
+
+   <ul class="nav nav-tabs nav-pills" role="tablist">
+      <li class="active" role="presentation">
+         <a href="#login" aria-controls="login" data-toggle="tab">Login</a>
+      </li>
+      <li role="presentation">
+         <a href="#forgot" aria-controls="forgot" data-toggle="tab" >Forgot Password</a>
+      </li>
+   </ul>
+
+   <div class="tab-content">
+      <div role="tabpanel" id="login" class="tab-pane fade in active">
+         {{ forms.userlogin(forgot) }}
+      </div>
+      <div role="tabpanel" id="forgot" class="tab-pane fade">
+         {{ forms.forgotpassword() }}
+      </div>
+   </div>
+
+{% endblock %}
